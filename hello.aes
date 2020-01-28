@@ -1,0 +1,5 @@
+contract LifeHack = 
+    entrypoint helloWorld() = 
+        "Hello World"
+
+  
