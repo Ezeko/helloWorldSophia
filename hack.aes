@@ -1,0 +1,21 @@
+contract LifeHack = 
+    record hack = { name :string,hackerAddress : address, image: string}
+
+    record state = {hacks: map(int, hack), hackLength: int }
+
+    entrypoint init() = { hacks = {}, 
+        hackLength = 0
+        }
+
+    entrypoint getHackLength() = 
+        state.hackLength
+    entrypoint getHacks() = Map.lookup(getHackLength(), state.hacks)
+
+    stateful entrypoint addHack (name': string, hackerAddress': address, image': string) =
+        let hack = {name= name', hackerAddress= Call.caller, image= image'}
+        let newLength = getHackLength() + 1
+        put(state{hacks[newLength] = hack, hackLength = newLength})
+        getHacks()
+   
+        
+        
